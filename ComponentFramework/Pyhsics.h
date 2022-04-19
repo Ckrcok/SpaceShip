@@ -2,6 +2,7 @@
 #include "Vector.h"
 #include "VMath.h"
 #include "PhysicsObject.h"
+#include "Plane.h"
 
 
 class Pyhsics
@@ -11,10 +12,13 @@ public:
 	static	void	SimpleNewtonMotion(PhysicsObject &object, const float deltaTime);
 	static	void	RigidBodyRotation(PhysicsObject &object, const float deltaTime);
 
-	//static	bool	PlaneSphereCollision(const PhysicsObject &object, const &Plane p);
-	//static	void	PlaneSphereCollisionResponse(PhysicsObject &object, const Plane& p);
-	//static	bool	SphereSphereCollision(const PhysicsObject& object1, const PhysicsObject &object2);
-	//static	void	SphereSphereCollisionResponse(PhysicsObject& object1, const PhysicsObject& object2);
+	// Collision detection methods:
+	static bool SphereSphereCollisionDetected(const PhysicsObject& PhysicsObject1, const PhysicsObject& PhysicsObject2);
+	static bool SpherePlaneCollisionDetected(const PhysicsObject& PhysicsObject1, const Plane& plane);
+	// Collision response methods:
+	static void SphereSphereCollisionResponse(PhysicsObject& PhysicsObject1,  PhysicsObject& PhysicsObject2);
+	static void SphereStaticSphereCollisionResponse(PhysicsObject& PhysicsObject1, const PhysicsObject& staticSphere);
+	static void SpherePlaneCollisionResponse(PhysicsObject& PhysicsObject1, const Plane& plane);
 
 	// rotate Z by the applied force on the object - the ship
 	Vec3 rotateZ(const Vec3 force, PhysicsObject& object);

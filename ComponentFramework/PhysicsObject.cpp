@@ -8,7 +8,9 @@ PhysicsObject::PhysicsObject():pos(0.0f,0.0f,0.0f), vel(0.0f, 0.0f, 0.0f), accel
 	angle = angularVel = angularAccel = 0.0f;
 }
 
-PhysicsObject::PhysicsObject(float mass_, float rotationalInertia_) : mass(mass_), rotationalInertia(rotationalInertia_), Actor(nullptr) {
+
+
+PhysicsObject::PhysicsObject(const Vec3 velocity_, const float rotationalInertia_, const float radius_ ) : vel(velocity_), mass(1.0f), radius(radius_), rotationalInertia(rotationalInertia_), Actor(nullptr) {
 
 }
 

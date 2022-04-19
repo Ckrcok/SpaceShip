@@ -13,47 +13,54 @@ private:
 	float mass, rotationalInertia;
 	float angle, angularVel, angularAccel;
 
+	float radius;
+
 public:
 	PhysicsObject();
-	PhysicsObject(float mass_, float rotationalInertial);
+	PhysicsObject(const Vec3 velocity_, const float rotationalInertia_, const float radius_);
 	virtual ~PhysicsObject();
-
 	void csv(float Time, float Torque);
 
 	//	set mess and get mass
+	inline	void	getRadius(const float& radius_) { radius = radius_; }
 	inline	void	setMass(const float& mass_) { mass = mass_; }
-	inline	float	getMass() { return mass; }
+	inline	float	getMass() const { return mass; }
 
 	// set and get rotationalInertia
 	inline	void	setrotationalInertia(const float& rotationalInertia_) { rotationalInertia = rotationalInertia_; }
-	inline	float	getrotationalInertia() {return rotationalInertia;}
+	inline	float	getrotationalInertia() const {return rotationalInertia;}
 
 	// set and get position
 	inline	void	setPosition(const Vec3& pos_) { pos = pos_; };
-	inline	Vec3	getPosition() { return pos; }
+	inline	Vec3	getPosition() const { return pos; }
 
 	//	set and get velocity
 	inline	void	setVelocity(const Vec3& vel_) { vel = vel_; }
-	inline	Vec3	getVelocity() { return vel; }
+	inline	Vec3	getVelocity()const { return vel; }
 
 	// set and get Acceleration
 	inline	void	setAcceleration(const Vec3& accel_) { accel = accel_; }
-	inline	Vec3	getAcceleration() { return accel; }
+	inline	Vec3	getAcceleration() const { return accel; }
 
 	//	set and get angle
 	inline	void	setAngle(const float& angle_) { angle = angle_; }
-	inline	float	getAngle() { return angle; }
+	inline	float	getAngle() const { return angle; }
 
 	//	set and get angular velocity
 	inline	void	setAngularVelocity(const float angularVel_) { angularVel = angularVel_; }
-	inline	float	getAngularVelocity() { return angularVel; }
+	inline	float	getAngularVelocity()const { return angularVel; }
 
 	//	set and get angular angular acceleration
 	inline	void	setAngularAcceleration(const float angularAccel_) { angularAccel = angularAccel_; }
-	inline	float	getAngularAcceleration() { return angularAccel; }
+	inline	float	getAngularAcceleration() const { return angularAccel; }
+
+
+	//	set and get angular angular acceleration
+	inline	void	setRadius(const float radius_) { radius = radius_; }
+	inline	float	getRadius() const { return radius; }
 
 	// F = ma
-	inline	Vec3	getForce() { return mass* accel; }
+	inline	Vec3	getForce() const { return mass* accel; }
 
 };
 

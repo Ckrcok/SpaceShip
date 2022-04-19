@@ -25,7 +25,7 @@ Scene0::~Scene0() {
 bool Scene0::OnCreate() {
 	Debug::Info("Loading assets Scene0: ", __FILE__, __LINE__);
 	// define ship with mass and rotationalInertia values
-	ship = new PhysicsObject(1000000, 26700000000);
+	ship = new PhysicsObject(Vec3(0,0,0), 1000000, 26700000000);
 
 	// create ship
 	ship->OnCreate();
@@ -99,7 +99,7 @@ void Scene0::Update(const float deltaTime) {
 	static float torque = 0;
 
 	//	print csv
-	if (printTime >= 1) {
+	if (printTime >= 0.99) {
 		ship->csv(time, torque);
 		printTime = 0;
 	}

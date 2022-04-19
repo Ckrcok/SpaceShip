@@ -3,11 +3,12 @@
 #include "Timer.h"
 #include "Window.h"
 #include "Scene0.h"
+#include "Scene1.h"
 
 
 SceneManager::SceneManager():
 	currentScene(nullptr), window(nullptr), timer(nullptr),
-	fps(60), isRunning(false), fullScreen(false) {
+	fps(144), isRunning(false), fullScreen(false) {
 	Debug::Info("Starting the SceneManager", __FILE__, __LINE__);
 }
 
@@ -46,7 +47,7 @@ bool SceneManager::Initialize(std::string name_, int width_, int height_) {
 	}
 
 	/********************************   Default first scene   ***********************/
-	BuildNewScene(SCENE_NUMBER::SCENE0);
+	BuildNewScene(SCENE_NUMBER::SCENE1);
 
 	return true;
 }
@@ -82,11 +83,11 @@ void SceneManager::HandleEvents() {
 				[[fallthrough]]; /// C17 Prevents switch/case fallthrough warnings
 
 			case SDL_SCANCODE_F2:
-				BuildNewScene(SCENE_NUMBER::SCENE1);
+				BuildNewScene(SCENE_NUMBER::SCENE0);
 				break;
 
 			case SDL_SCANCODE_F3:
-				BuildNewScene(SCENE_NUMBER::SCENE0);
+				BuildNewScene(SCENE_NUMBER::SCENE1);
 				break;
 			case SDL_SCANCODE_F4:
 				BuildNewScene(SCENE_NUMBER::SCENE0);
@@ -123,10 +124,10 @@ void SceneManager::BuildNewScene(SCENE_NUMBER scene) {
 			status = currentScene->OnCreate();
 			break;
 
-		//case SCENE_NUMBER::SCENE1:
-		//	currentScene = new Scene1();
-		//	status = currentScene->OnCreate();
-		//	break;
+		case SCENE_NUMBER::SCENE1:
+			currentScene = new Scene1();
+			status = currentScene->OnCreate();
+			break;
 
 		//case SCENE_NUMBER::SCENE2:
 		//	currentScene = new Scene2();
