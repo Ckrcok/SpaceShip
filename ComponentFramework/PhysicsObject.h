@@ -11,20 +11,31 @@ class PhysicsObject : public Actor
 private:
 	Vec3 pos, vel, accel;
 	float mass, rotationalInertia;
-	float angle, angularVel, angularAccel;
-
+	float angle, angularVel, angularAccel, length;
+	Vec3 previousAccel;
 	float radius;
 
 public:
 	PhysicsObject();
 	PhysicsObject(const Vec3 velocity_, const float rotationalInertia_, const float radius_);
+	PhysicsObject(const Vec3 velocity_, const float rotationalInertia_, const float radius_, const float length_);
 	virtual ~PhysicsObject();
 	void csv(float Time, float Torque);
 
 	//	set mess and get mass
-	inline	void	getRadius(const float& radius_) { radius = radius_; }
 	inline	void	setMass(const float& mass_) { mass = mass_; }
 	inline	float	getMass() const { return mass; }
+
+	//	set mess and get mass
+	inline	void	setPreviousAccel(const Vec3& previousAccel_) { previousAccel = previousAccel_; }
+	inline	Vec3	getPreviousAccel() const { return previousAccel; }
+
+
+
+	// set and get length
+	inline	void	setlength(const float& length_) { length = length_; }
+	inline	float	getlength() const { return length; }
+
 
 	// set and get rotationalInertia
 	inline	void	setrotationalInertia(const float& rotationalInertia_) { rotationalInertia = rotationalInertia_; }
@@ -58,6 +69,7 @@ public:
 	//	set and get angular angular acceleration
 	inline	void	setRadius(const float radius_) { radius = radius_; }
 	inline	float	getRadius() const { return radius; }
+
 
 	// F = ma
 	inline	Vec3	getForce() const { return mass* accel; }

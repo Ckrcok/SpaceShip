@@ -5,10 +5,14 @@
 void Pyhsics::SimpleNewtonMotion(PhysicsObject& object, const float deltatime){
 
 	//posf = posi + velli * deltatime + 0.5  * accel * deltaTime^2
-	object.setPosition(object.getPosition() + object.getVelocity() + 0.5 * object.getAcceleration() * deltatime * deltatime);
+	//object.setPosition(object.getPosition() + object.getVelocity() + 0.5 * object.getAcceleration() * deltatime * deltatime);
+	object.setPosition(object.getPosition() + object.getVelocity() * deltatime + ( 0.5 * object.getPreviousAccel() * deltatime * deltatime));
 
 	//velf =veli + accel * deltaTime
-	object.setVelocity(object.getVelocity() + object.getAcceleration() * deltatime);
+	//object.setVelocity(object.getVelocity() + object.getAcceleration() * deltatime);
+	object.setVelocity(object.getVelocity() + 0.5 * ( object.getPreviousAccel() + object.getAcceleration()) * deltatime);
+
+	object.setPreviousAccel(object.getAcceleration());
 }
 
 void Pyhsics::RigidBodyRotation(PhysicsObject& object, const float deltatime){
@@ -33,6 +37,42 @@ Vec3 Pyhsics::rotateZ(const Vec3 force, PhysicsObject& object){
 
 	// return force X and force Y
 	return Vec3(ForceX, ForceY, 0.0f);
+}
+
+void Pyhsics::ApplyForces(PhysicsObject& object, float& waterHeight) {
+	const float g = 9.81f;
+	const float dragC = 0.4f;
+	const float waterDensity = 1.0f;
+	float theta = 2 * acosf(object.getMass() / object.getRadius());
+	float v = 0;
+
+
+	if (object.getPosition().y + object.getRadius() <= waterHeight){
+	// fully sumbereged
+		v = M_PI * powf(object.getRadius(), 2) * object.getlength();
+		printf("\n Submereged \n");
+	}else if ((object.getPosition().y - object.getRadius()) <= waterHeight && object.getPosition().y >= waterHeight) {
+	// half subemreged
+		v = (1 / 2) * powf(object.getRadius(), 2) * (theta - sinf(theta)) * object.getlength();
+		printf("\n Half Sumberged");
+	}else if (object.getPosition().y <= waterHeight) {
+	// above the waterHeight
+		v = M_PI * powf(object.getRadius(), 2) * object.getlength() - (1.0f / 2.0f) * powf(object.getRadius(), 2) * (theta - sinf(theta) * object.getlength());
+		printf("\n mostly submerged \n");
+	}else if ((object.getPosition().y - object.getRadius()) > waterHeight) {
+		v = 0;
+		printf("\n above watrer \n");
+	}
+
+
+
+
+	Vec3 fGrav(0, object.getMass() * -g, 0);
+	Vec3 fDrag(dragC * -object.getVelocity());
+	Vec3 fBouy(0, waterDensity * g * v, 0);
+	Vec3 fNet = fGrav + fDrag + fBouy;
+	ApplyForce(fNet, object);
+
 }
 
 bool Pyhsics::SphereSphereCollisionDetected(const PhysicsObject& PhysicsObject1, const PhysicsObject& PhysicsObject2) {

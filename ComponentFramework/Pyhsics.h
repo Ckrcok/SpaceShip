@@ -9,14 +9,15 @@ class Pyhsics
 {
 public:
 	//  it will remain at rest or keep moving in a straight line at constant speed unless it is acted upon by a force.
-	static	void	SimpleNewtonMotion(PhysicsObject &object, const float deltaTime);
-	static	void	RigidBodyRotation(PhysicsObject &object, const float deltaTime);
+	static	void	SimpleNewtonMotion(PhysicsObject& object, const float deltaTime);
+	static	void	RigidBodyRotation(PhysicsObject& object, const float deltaTime);
 
 	// Collision detection methods:
 	static bool SphereSphereCollisionDetected(const PhysicsObject& PhysicsObject1, const PhysicsObject& PhysicsObject2);
 	static bool SpherePlaneCollisionDetected(const PhysicsObject& PhysicsObject1, const Plane& plane);
+
 	// Collision response methods:
-	static void SphereSphereCollisionResponse(PhysicsObject& PhysicsObject1,  PhysicsObject& PhysicsObject2);
+	static void SphereSphereCollisionResponse(PhysicsObject& PhysicsObject1, PhysicsObject& PhysicsObject2);
 	static void SphereStaticSphereCollisionResponse(PhysicsObject& PhysicsObject1, const PhysicsObject& staticSphere);
 	static void SpherePlaneCollisionResponse(PhysicsObject& PhysicsObject1, const Plane& plane);
 
@@ -29,5 +30,7 @@ public:
 
 	//	apply force and will change accelration by force/ mass  // F = ma
 	static	void ApplyForce(Vec3 force, PhysicsObject& object) { object.setAcceleration(force / object.getMass()); };
-};
 
+	static void ApplyForces(PhysicsObject& object, float& waterHeight);
+
+};

@@ -1,1 +1,6 @@
-﻿  ComponentFramework.vcxproj -> D:\Dor\Studies\Humber College\Second semester\Pyhsics\Assigment #2\sphere\ComponentFramework22.0.0\Debug\ComponentFramework.exe
+﻿  Pyhsics.cpp
+  Scene3.cpp
+D:\Dor\Studies\Humber College\Second semester\Pyhsics\Assigment #3\Boyance\ComponentFramework22.0.0\ComponentFramework\Scene3.cpp(30,56): warning C4305: 'argument': truncation from 'double' to 'const float'
+D:\Dor\Studies\Humber College\Second semester\Pyhsics\Assigment #3\Boyance\ComponentFramework22.0.0\ComponentFramework\Scene3.cpp(31,53): warning C4305: 'argument': truncation from 'double' to 'const float'
+  Generating Code...
+  ComponentFramework.vcxproj -> D:\Dor\Studies\Humber College\Second semester\Pyhsics\Assigment #3\Boyance\ComponentFramework22.0.0\Debug\ComponentFramework.exe

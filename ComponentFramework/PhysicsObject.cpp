@@ -4,13 +4,16 @@
 using namespace MATH;
 using namespace std;
 
-PhysicsObject::PhysicsObject():pos(0.0f,0.0f,0.0f), vel(0.0f, 0.0f, 0.0f), accel(0.0f, 0.0f, 0.0f), mass(1.0f), rotationalInertia(1.0f), Actor(nullptr) {
+PhysicsObject::PhysicsObject():pos(0.0f,0.0f,0.0f), vel(0.0f, 0.0f, 0.0f), accel(0.0f, 0.0f, 0.0f), mass(1.0f), rotationalInertia(1.0f), length(1.0f), Actor(nullptr) {
 	angle = angularVel = angularAccel = 0.0f;
 }
 
 
+PhysicsObject::PhysicsObject(const Vec3 velocity_, const float rotationalInertia_, const float radius_) : vel(velocity_), mass(1.0f), radius(radius_), rotationalInertia(rotationalInertia_), Actor(nullptr) {
 
-PhysicsObject::PhysicsObject(const Vec3 velocity_, const float rotationalInertia_, const float radius_ ) : vel(velocity_), mass(1.0f), radius(radius_), rotationalInertia(rotationalInertia_), Actor(nullptr) {
+}
+
+PhysicsObject::PhysicsObject(const Vec3 velocity_, const float rotationalInertia_, const float radius_, const float length_) : vel(velocity_), mass(1.0f), radius(radius_), rotationalInertia(rotationalInertia_), length(length_), Actor(nullptr) {
 
 }
 
